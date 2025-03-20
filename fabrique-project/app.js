@@ -8,7 +8,7 @@ const engine = new Liquid();
 
 // Set up Liquid as the view engine
 app.engine('liquid', engine.express());
-app.set('views', './views');
+app.set('views', './views');x
 app.set('view engine', 'liquid');
 
 // Serve static files from the public directory

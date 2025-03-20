@@ -3,29 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <title>Qatar Museums</title>
-  <link rel="stylesheet" href="/global.css"> <!-- optional, if you have styles -->
+  <link rel="stylesheet" href="/global.css">
 </head>
 <body>
-  <h1>Qatar Museums</h1>
-  {% if artObjects %}
-    <ul>
-      {% for item in artObjects %}
-        <li>{{ item.title }} - {{ item.description }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No art objects found.</p>
-  {% endif %}
+<!-- Header & Navigation -->
+<header>
+  <nav class="navbar">
+    <div class="nav-left">
+      <!-- Logo or Title -->
+      <a class="logo" href="#">
+        <img src="/assets/qatar-museums-logo.png" alt="Qatar Museums" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Stories</a></li>
+        <li><a href="#">What's On</a></li>
+        <li><a href="#">Collection</a></li>
+        <li><a href="#">Visit</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#">Tickets</a></li>
+        <li><a href="#">Members</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Menu</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
 
-  <h2>Artists</h2>
-  {% if artists %}
-    <ul>
-      {% for artist in artists %}
-        <li>{{ artist.name }}</li>
+<!-- Main Content -->
+<main>
+  <!-- Search & Filters -->
+  <section class="search-section">
+    <h2>Search the Collection</h2>
+    <input type="text" placeholder="Search..." aria-label="Search the collection">
+    <div class="filters">
+      <button>All objects</button>
+      <button>Pottery</button>
+      <button>Islamic art</button>
+      <button>Tapestry</button>
+      <button>Glass</button>
+    </div>
+  </section>
+
+  <!-- Mosaic/Gallery Section -->
+  <section class="mosaic-gallery">
+    {% if artObjects %}
+      {% for item in artObjects %}
+        <div class="gallery-item">
+          <!-- If your API provides an image URL, replace 'item.image_url' with the correct field -->
+          <img src="{{ item.image_url | default: '/assets/placeholder.jpg' }}" alt="{{ item.title }}">
+          <div class="overlay">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
       {% endfor %}
-    </ul>
-  {% else %}
-    <p>No artists found.</p>
-  {% endif %}
+    {% else %}
+      <p>No art objects found.</p>
+    {% endif %}
+  </section>
+
+  <!-- Optional: Artists or Other Data -->
+  <section class="artists-section">
+    <h2>Artists</h2>
+    {% if artists %}
+      <ul>
+        {% for artist in artists %}
+          <li>{{ artist.name }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No artists found.</p>
+    {% endif %}
+  </section>
+</main>
 </body>
 </html>
